@@ -18,7 +18,6 @@ customerProduct.get('/products', verifyJWT, async (req, res) => {
         .json({error : err})
     }  
 })
-
 // @desc set up cart 
 customerProduct.post('/add/:id', verifyJWT, async(req, res) => { 
     const productId = req.params.id

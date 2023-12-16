@@ -12,7 +12,8 @@ sellerProductRouter.post('/add', verifyJWT, async (req, res) => {
         name : req.body.name,
         price : req.body.price,
         inStock : req.body.inStock,
-        seller : req.decodedToken?.id
+        seller : req.decodedToken?.id,
+        category : req.body.category
     })
     try { 
         const newProduct = await product.save()

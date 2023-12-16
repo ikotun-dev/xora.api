@@ -23,7 +23,8 @@ sellerProductRouter.post('/add', verifyJwt_1.verifyJWT, (req, res) => __awaiter(
         name: req.body.name,
         price: req.body.price,
         inStock: req.body.inStock,
-        seller: (_a = req.decodedToken) === null || _a === void 0 ? void 0 : _a.id
+        seller: (_a = req.decodedToken) === null || _a === void 0 ? void 0 : _a.id,
+        category: req.body.category
     });
     try {
         const newProduct = yield product.save();

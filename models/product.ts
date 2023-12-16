@@ -7,7 +7,8 @@ interface productInterface extends Document {
     price: number;
     inStock : boolean;
     seller : Types.ObjectId;
-    created_at : Date
+    created_at : Date,
+    category : string
 }
 
 //productSchema
@@ -32,6 +33,10 @@ const productSchema = new Schema<productInterface> ({
     created_at : {
         type : Date,
         default : Date.now(),
+        required: true
+    },
+    category : {
+        type: String,
         required: true
     }
 })
