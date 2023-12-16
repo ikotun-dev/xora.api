@@ -15,7 +15,7 @@ const orderSchema = new Schema<OrderInterface> ({
     },
     products : {
         type : [Schema.Types.ObjectId],
-        ref : 'Seller',
+        ref : 'Product',
         required : true
     },
     totalPrice : {
@@ -33,3 +33,4 @@ const orderSchema = new Schema<OrderInterface> ({
 const orderModel = model<OrderInterface>('Order', orderSchema)
 
 export default orderModel;
+

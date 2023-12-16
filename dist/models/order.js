@@ -9,7 +9,7 @@ const orderSchema = new mongoose_1.Schema({
     },
     products: {
         type: [mongoose_1.Schema.Types.ObjectId],
-        ref: 'Seller',
+        ref: 'Product',
         required: true
     },
     totalPrice: {

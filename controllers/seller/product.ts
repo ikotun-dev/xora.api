@@ -42,4 +42,5 @@ sellerProductRouter.get('/products', verifyJWT, async (req, res) => {
 })
 
 
+
 export default sellerProductRouter
