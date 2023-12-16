@@ -33,6 +33,7 @@ customerProduct.get('/products', verifyJwt_1.verifyJWT, (req, res) => __awaiter(
     }
 }));
 // @desc set up cart 
+// @route /store/add/:id
 customerProduct.post('/add/:id', verifyJwt_1.verifyJWT, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const productId = req.params.id;
     const product = yield product_1.default.findById(productId);

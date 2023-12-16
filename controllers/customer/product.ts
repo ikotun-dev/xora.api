@@ -19,6 +19,8 @@ customerProduct.get('/products', verifyJWT, async (req, res) => {
     }  
 })
 // @desc set up cart 
+// @route /store/add/:id
+
 customerProduct.post('/add/:id', verifyJWT, async(req, res) => { 
     const productId = req.params.id
     const product = await productModel.findById(productId)
