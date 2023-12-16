@@ -30,50 +30,50 @@ customerProduct.get('/products', verifyJwt_1.verifyJWT, (req, res) => __awaiter(
     catch (err) {
         res.status(400)
             .json({ error: err });
+        // @desc set up cart 
+        // @route /store/add/:id
+        customerProduct.post('/add/:id', verifyJwt_1.verifyJWT, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+            const productId = req.params.id;
+            const product = yield product_1.default.findById(productId);
+            if (!product) {
+                res.status(404)
+                    .json({ error: "Product not found" });
+            }
+            else {
+                //check if an unsettled cart exits 
+                const cart = yield cart_1.default.findOne({ customer: req.decodedToken.id, settled: false });
+                if (!cart) {
+                    try {
+                        const newCart = new cart_1.default({
+                            totalPrice: product.price,
+                            products: [productId],
+                            customer: req.decodedToken.id,
+                            settled: false
+                        });
+                        const savedCart = yield newCart.save();
+                        res.status(200)
+                            .json({ message: "Added new Cart" });
+                    }
+                    catch (err) {
+                        res.status(400)
+                            .json({ error: err });
+                    }
+                }
+                else {
+                    try {
+                        const latestCart = cart.products.push(product.id);
+                        cart.totalPrice += product.price;
+                        yield cart.save();
+                        res.status(200)
+                            .json({ message: "Added to Existing Cart" });
+                    }
+                    catch (err) {
+                        res.status(400)
+                            .json({ error: err });
+                    }
+                }
+            }
+        }));
+        export default customerProduct;
     }
 }));
-// @desc set up cart 
-// @route /store/add/:id
-customerProduct.post('/add/:id', verifyJwt_1.verifyJWT, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const productId = req.params.id;
-    const product = yield product_1.default.findById(productId);
-    if (!product) {
-        res.status(404)
-            .json({ error: "Product not found" });
-    }
-    else {
-        //check if an unsettled cart exits 
-        const cart = yield cart_1.default.findOne({ customer: req.decodedToken.id, settled: false });
-        if (!cart) {
-            try {
-                const newCart = new cart_1.default({
-                    totalPrice: product.price,
-                    products: [productId],
-                    customer: req.decodedToken.id,
-                    settled: false
-                });
-                const savedCart = yield newCart.save();
-                res.status(200)
-                    .json({ message: "Added new Cart" });
-            }
-            catch (err) {
-                res.status(400)
-                    .json({ error: err });
-            }
-        }
-        else {
-            try {
-                const latestCart = cart.products.push(product.id);
-                cart.totalPrice += product.price;
-                yield cart.save();
-                res.status(200)
-                    .json({ message: "Added to Existing Cart" });
-            }
-            catch (err) {
-                res.status(400)
-                    .json({ error: err });
-            }
-        }
-    }
-}));
-exports.default = customerProduct;

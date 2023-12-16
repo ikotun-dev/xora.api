@@ -16,8 +16,7 @@ customerProduct.get('/products', verifyJWT, async (req, res) => {
     } catch (err) {
         res.status(400)
         .json({error : err})
-    }  
-})
+
 // @desc set up cart 
 // @route /store/add/:id
 
