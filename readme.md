@@ -2,15 +2,28 @@
 ###  
 
 ##### Entities
-> Sellers
-> Buyers
-> Product
-> Cart
-> Order
-> Payment
+> Sellers <br/>
+> Buyers <br/>
+> Product <br/>
+> Cart <br/>
+> Order <br/>
+> Payment <br/>
 
-Routes
-Seller SignupSeller LoginSeller ProductsProducts detailsView Single ProductsUser SignupUser LoginView Products in Categories (Filter)Paginate Users Product FeedPaginate Sellers Personal Product FeedAdd product to cartOrder containing details
+####  Routes
+> Seller Signup <br/>
+> Seller Login <br/>
+> Seller Products <br/>
+> Products details <br/>
+> View Single Product <br/>
+> User Signup <br/>
+> User Login <br/>
+> View Products in Categories (Filter) <br/>
+> Paginate <br/>
+> Users Product Feed <br/>
+> Sellers Personal Product Feed <br/>
+> Add product to cart <br/>
+> Order containing details <br/>
 
-Relationships
-User : ———< OrderSeller ———-< Product
+#### Relationships
+> User : ———< Order<br/>
+> Seller ———-< Product
