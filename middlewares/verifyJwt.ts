@@ -5,10 +5,10 @@ import { jwtSecretKey }  from './createJwt'
 interface DecodedToken {
     userId: string;
     username: string;
-    // Add other properties based on your JWT payload structure
+    
 }
 
-// Augment the existing Request type
+// 
 declare global {
     namespace Express {
         interface Request {
