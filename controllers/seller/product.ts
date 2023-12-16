@@ -1,6 +1,7 @@
 import { Router, Request, Response} from 'express'
-import productModel from '../../models/product'
-import { verifyJWT } from '../../middlewares/verifyJwt'
+import  productModel  from '../../models/product'
+import cartModel from '../../models/cart'
+import   { verifyJWT } from '../../middlewares/verifyJwt'
 
 
 const sellerProductRouter = Router()
@@ -26,7 +27,7 @@ sellerProductRouter.post('/add', verifyJWT, async (req, res) => {
 
 
 // @desc Gets Sellers Product 
-sellerProductRouter.get('/products', verifyJWT, async (req, res) => { 
+sellerProductRouter.get('/personal', verifyJWT, async (req, res) => { 
     const products = await productModel.find({seller: req.decodedToken?.id})
     if (!products) { 
         res.status(404)
@@ -41,6 +42,6 @@ sellerProductRouter.get('/products', verifyJWT, async (req, res) => {
     
 })
 
-
+// @desc Adds Product to cart ( )
 
 export default sellerProductRouter

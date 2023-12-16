@@ -36,7 +36,7 @@ sellerProductRouter.post('/add', verifyJwt_1.verifyJWT, (req, res) => __awaiter(
     }
 }));
 // @desc Gets Sellers Product 
-sellerProductRouter.get('/products', verifyJwt_1.verifyJWT, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+sellerProductRouter.get('/personal', verifyJwt_1.verifyJWT, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _b;
     const products = yield product_1.default.find({ seller: (_b = req.decodedToken) === null || _b === void 0 ? void 0 : _b.id });
     if (!products) {
@@ -51,4 +51,5 @@ sellerProductRouter.get('/products', verifyJwt_1.verifyJWT, (req, res) => __awai
         console.log(err);
     }
 }));
+// @desc Adds Product to cart ( )
 exports.default = sellerProductRouter;

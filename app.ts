@@ -19,8 +19,8 @@ app.get('/', (req, res) => {
 
 import sellerRouter from './controllers/seller/auth';
 import customerRouter from './controllers/customer/auth';
-import sellerProductRouter from './controllers/seller/addProduct';
-import customerProductRouter from './controllers/customer/viewProduct'
+import sellerProductRouter from './controllers/seller/product';
+import customerProductRouter from './controllers/customer/product'
 
 app.use('/customer', customerRouter);
 app.use('/seller', sellerRouter);
