@@ -20,10 +20,12 @@ app.get('/', (req, res) => {
 import sellerRouter from './controllers/seller/auth';
 import customerRouter from './controllers/customer/auth';
 import sellerProductRouter from './controllers/seller/addProduct';
+import customerProductRouter from './controllers/customer/viewProduct'
 
 app.use('/customer', customerRouter);
 app.use('/seller', sellerRouter);
 app.use('/product', sellerProductRouter);
+app.use('/store', customerProductRouter)
 
 app.listen(8000, () => {
     console.log('xora app listening on port 8000!');

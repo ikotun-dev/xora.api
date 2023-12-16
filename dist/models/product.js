@@ -19,6 +19,11 @@ const productSchema = new mongoose_1.Schema({
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'Seller',
         required: true
+    },
+    created_at: {
+        type: Date,
+        default: Date.now(),
+        required: true
     }
 });
 const productModel = (0, mongoose_1.model)('Product', productSchema);

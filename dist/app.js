@@ -19,9 +19,11 @@ app.get('/', (req, res) => {
 const auth_1 = __importDefault(require("./controllers/seller/auth"));
 const auth_2 = __importDefault(require("./controllers/customer/auth"));
 const addProduct_1 = __importDefault(require("./controllers/seller/addProduct"));
+const viewProduct_1 = __importDefault(require("./controllers/customer/viewProduct"));
 app.use('/customer', auth_2.default);
 app.use('/seller', auth_1.default);
 app.use('/product', addProduct_1.default);
+app.use('/store', viewProduct_1.default);
 app.listen(8000, () => {
     console.log('xora app listening on port 8000!');
 });

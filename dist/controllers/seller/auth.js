@@ -54,8 +54,8 @@ sellerRouter.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, func
         const isMatch = yield bcrypt_1.default.compare(seller.password, existingSeller.password);
         if (isMatch) {
             //generate access token
-            const token = (0, createJwt_1.createSellerJWT)({ id: existingSeller.id });
-            res.status(200).json({ message: "Login successful", "token": token });
+            const token = (0, createJwt_1.createJWT)({ id: existingSeller.id });
+            res.status(200).json({ message: "Login successful", "accessToken": token });
         }
         else {
             res.status(400).json({ message: "Invalid Credentials" });

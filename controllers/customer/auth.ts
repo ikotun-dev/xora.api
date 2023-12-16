@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import customerModel from "../../models/customer";
 import bcrypt from "bcrypt";
-
+import { createJWT } from "../../middlewares/createJwt";
 const customerRouter: Router = Router();
 // @desc Create a new Seller
 customerRouter.post("/signup", async (req, res) => {
@@ -29,6 +29,7 @@ customerRouter.post("/signup", async (req, res) => {
   }
 });
 
+// @desc Logs a customer in
 customerRouter.post("/login", async (req, res) => {
   const customer = {
     username: req.body.username,
@@ -45,7 +46,8 @@ customerRouter.post("/login", async (req, res) => {
       existingCustomer.password
     );
     if (isMatch) {
-      res.status(200).json({ message: "Login successful" });
+      const token = createJWT({id : existingCustomer.id})
+      res.status(200).json({ message: "Login successful", acccessToken: token });
     } else {
       res.status(400).json({ message: "Invalid Credentials" });
     }

@@ -17,12 +17,13 @@ const product_1 = __importDefault(require("../../models/product"));
 const verifyJwt_1 = require("../../middlewares/verifyJwt");
 const sellerProductRouter = (0, express_1.Router)();
 sellerProductRouter.post('/add', verifyJwt_1.verifyJWT, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     console.log(req.decodedToken);
     const product = new product_1.default({
         name: req.body.name,
         price: req.body.price,
         inStock: req.body.inStock,
-        seller: req.decodedToken.id
+        seller: (_a = req.decodedToken) === null || _a === void 0 ? void 0 : _a.id
     });
     try {
         const newProduct = yield product.save();
@@ -34,6 +35,20 @@ sellerProductRouter.post('/add', verifyJwt_1.verifyJWT, (req, res) => __awaiter(
             .json({ error: err });
     }
 }));
-sellerProductRouter.get('/products', verifyJwt_1.verifyJWT, (req, res) => {
-});
+// @desc Gets Sellers Product 
+sellerProductRouter.get('/products', verifyJwt_1.verifyJWT, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _b;
+    const products = yield product_1.default.find({ seller: (_b = req.decodedToken) === null || _b === void 0 ? void 0 : _b.id });
+    if (!products) {
+        res.status(404)
+            .json({ message: "No products found" });
+    }
+    try {
+        res.status(200)
+            .json(products);
+    }
+    catch (err) {
+        console.log(err);
+    }
+}));
 exports.default = sellerProductRouter;

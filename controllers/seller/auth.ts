@@ -1,9 +1,10 @@
 import { Request, Response, Router } from 'express';
 import sellerModel from '../../models/seller';
 import bcrypt from 'bcrypt';
-import { createSellerJWT } from '../../middlewares/createJwt';
+import { createJWT } from '../../middlewares/createJwt';
 
 const sellerRouter: Router =  Router();
+
 // @desc Create a new Seller 
 sellerRouter.post('/signup', async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -27,6 +28,8 @@ sellerRouter.post('/signup', async (req, res) => {
         res.status(400).json(err);
     }
 })
+
+
 // @desc Logs a seller in
 // @url /seller/login
 sellerRouter.post('/login', async (req, res) => {
@@ -41,8 +44,8 @@ sellerRouter.post('/login', async (req, res) => {
         const isMatch = await bcrypt.compare(seller.password, existingSeller.password)
         if(isMatch) {
             //generate access token
-            const token =  createSellerJWT({id: existingSeller.id})
-            res.status(200).json({message : "Login successful", "token" : token})
+            const token =  createJWT({id: existingSeller.id})
+            res.status(200).json({message : "Login successful", "accessToken" : token})
         } else {
             res.status(400).json({message : "Invalid Credentials"})
         }

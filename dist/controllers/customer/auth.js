@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const customer_1 = __importDefault(require("../../models/customer"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const createJwt_1 = require("../../middlewares/createJwt");
 const customerRouter = (0, express_1.Router)();
 // @desc Create a new Seller
 customerRouter.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -43,6 +44,7 @@ customerRouter.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, f
         res.status(400).json(err);
     }
 }));
+// @desc Logs a customer in
 customerRouter.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const customer = {
         username: req.body.username,
@@ -56,7 +58,8 @@ customerRouter.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, fu
         //check if the password tallies with the inputed password
         const isMatch = yield bcrypt_1.default.compare(customer.password, existingCustomer.password);
         if (isMatch) {
-            res.status(200).json({ message: "Login successful" });
+            const token = (0, createJwt_1.createJWT)({ id: existingCustomer.id });
+            res.status(200).json({ message: "Login successful", acccessToken: token });
         }
         else {
             res.status(400).json({ message: "Invalid Credentials" });
